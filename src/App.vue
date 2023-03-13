@@ -5,10 +5,6 @@ import Userpassword from './Userpassword.vue';
 
 import { ref, watch } from 'vue';
 
-const userName = ref("");
-const userEmail = ref("");
-const userPassword = ref("");
-
 const usernameEmpty = ref(true);
 const userEmailEmpty = ref(true);
 const userPasswordEmpty = ref(true);
@@ -31,10 +27,10 @@ watch(
 )
 
 function userNameHandler(userInput) {
+  console.log(userInput)
   if (userInput.trim()) {
     usernameEmpty.value = false;
-    userName.value = userInput;
-    formData.value = { ...formData.value, userName: userName.value }
+    formData.value = { ...formData.value, userName: userInput }
     usernameFocused.value = true;
   }
   else {
@@ -47,8 +43,7 @@ function userNameHandler(userInput) {
 function userEmailHandler(userInput) {
   if (userInput.trim()) {
     userEmailEmpty.value = false;
-    userEmail.value = userInput;
-    formData.value = { ...formData.value, userEmail: userEmail.value }
+    formData.value = { ...formData.value, userEmail: userInput }
     usernameFocused.value = true;
   }
   else {
@@ -61,8 +56,7 @@ function userEmailHandler(userInput) {
 function userPasswordHandler(userInput) {
   if (userInput) {
     userPasswordEmpty.value = false;
-    userPassword.value = userInput;
-    formData.value = { ...formData.value, userPassword: userPassword.value }
+    formData.value = { ...formData.value, userPassword: userInput }
     usernameFocused.value = true;
   }
   else {
@@ -94,26 +88,26 @@ function onSubmitHandler() {
     <form
     v-show="!hideLoginPoratl"
     @submit.prevent="onSubmitHandler"
-      class="font-bold p-10 bg-purple-100 shadow-md shadow-pink-300 rounded-xl w-[600px]">
+      class="font-bold p-10 bg-purple-100 shadow-lg shadow-black rounded-xl w-[600px]">
       <h1 class="text-purple-400 text-4xl text-center mb-5">Login Portal <i class="pl-5 fa-solid fa-envelope"></i></h1>
 
-      <Username :userName="userName" @userNameHandler="userNameHandler" :usernameEmpty="usernameEmpty"
+      <Username @userNameHandler="userNameHandler" :usernameEmpty="usernameEmpty"
         :usernameFocused="usernameFocused" />
-      <Useremail :userEmail="userEmail" @userEmailHandler="userEmailHandler" :userEmailEmpty="userEmailEmpty"
+      <Useremail @userEmailHandler="userEmailHandler" :userEmailEmpty="userEmailEmpty"
         :useremailFocused="useremailFocused" />
-      <Userpassword :userPassword="userPassword" @userPasswordHandler="userPasswordHandler"
+      <Userpassword @userPasswordHandler="userPasswordHandler"
         :userPasswordEmpty="userPasswordEmpty" :userpasswordFocused="userpasswordFocused" />
 
       <div class="flex justify-center mt-5">
         <button type="submit"
-          class="border-2 border-purple-400 px-5 py-2 rounded-lg bg-purple-400 text-white shadow-md shadow-purple-300 active:scale-90 transition-all"><i
+          class="border-2 border-purple-400 px-5 py-2 rounded-lg bg-purple-400 text-white shadow-md shadow-purple-300 active:scale-90 transition-all hover:bg-purple-600  hover:border-purple-600"><i
             class="fa-solid fa-paper-plane pr-2"></i> Login</button>
       </div>
     </form>
 
   <section 
   v-show="hideLoginPoratl"
-  class="border-[1px] font-bold p-10 bg-purple-100 shadow-md shadow-pink-300 rounded-xl w-[600px]">
+  class="font-bold p-10 bg-purple-100 shadow-lg shadow-black rounded-xl w-[600px]">
     <p class="text-center text-purple-400 text-3xl">User Authenticated <i class="pl-5 fa-solid fa-user-tie"></i></p>
   </section>
 
